@@ -538,7 +538,7 @@
 
 
 <h1 id="business-use-cases">Business Use Cases</h1>
-<p>These use cases represent the value delivered to both end users and administrators.</p>
+<p>It describes how a user interacts with the system to achieve a specific goal.</p>
 <hr />
 <h2 id="1-business-use-case-overview">1. Business Use Case Overview</h2>
 <div style="text-align: center; max-width: 800px; margin: 0 auto;">
@@ -548,10 +548,11 @@
     User
       Register &amp; Login
       Search Hotels
-      View Hotel Room Details
+      View Hotel and Room Details
       Book Room
     Admin
-      Manage Hotels
+      Login
+      Manage Hotel and Details 
       View User Details
       View Bookings</code></pre>
 
@@ -568,71 +569,58 @@
 <li>Creates trackable user profiles for future operations</li>
 </ul>
 <p><strong>Main Flow:</strong></p>
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
 <pre class="mermaid"><code>flowchart TD
-    A[User Registers] --&gt; B[Enter Email + Password]
-    B --&gt; C[Credentials Verified]
-    C --&gt; D[System Grants Access]
-    D --&gt; E[Access Main Platform]
-
-    style A fill:#e3f2fd
-    style E fill:#c8e6c9</code></pre>
-
-</div>
-
+    Start[User Visits Platform] --&gt; Choice{New User or Existing User?}
+    Choice --&gt;|New User| Register[Register with Name, Email &amp; Password]
+    Choice --&gt;|Existing User| Login[Login with Email &amp; Password]
+    Register --&gt; Verify[Credentials Verified]
+    Login --&gt; Verify
+    Verify --&gt; Grant[System Grants Access]
+    Grant --&gt; Access[Access Main Platform]</code></pre>
 <hr />
 <h3 id="uc-02-view-hotel-details">UC-02: View Hotel Details</h3>
 <p><strong>Actor:</strong> User<br />
-<strong>Goal:</strong> Allow users to evaluate hotels comprehensively</p>
+<strong>Goal:</strong> Allow users to browse hotels using filters and view detailed information including ratings and user feedback</p>
 <p><strong>Business Value:</strong></p>
 <ul>
-<li>Improves user confidence in booking</li>
-<li>Reduces cancellation rate due to informed decisions</li>
+<li>Improves user confidence in booking through transparency</li>
+<li>Reduces cancellation rate due to well-informed decisions</li>
 </ul>
 <p><strong>Features Display:</strong></p>
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
-<pre class="mermaid"><code>flowchart LR
-    A[View Hotel Rooms] --&gt; B[Photo Carousel]
-    A --&gt; C[Analyze Hotel Rooms as per rerequirement]
-    A --&gt; D[Analyze maximum persons allowed in the room]
-    A --&gt; E[Hotel Room Description]
-
-    style A fill:#fff9c4
-    style B fill:#f3e5f5
-    style C fill:#f3e5f5
-    style D fill:#f3e5f5
-    style E fill:#f3e5f5</code></pre>
-
-</div>
-
+<pre class="mermaid"><code>flowchart TD
+    Start[User Views Hotel Details] --&gt; Photos[Browse Photos of Hotel &amp; Rooms]
+    Start --&gt; Ratings[View Ratings &amp; Reviews]
+    Start --&gt; Feedback[Read User Feedback]
+    Start --&gt; Description[Read Hotel &amp; Room Description]
+    Photos --&gt; Decision{Satisfied?}
+    Ratings --&gt; Decision
+    Feedback --&gt; Decision
+    Description --&gt; Decision
+    Decision --&gt;|Yes| Proceed[Proceed to Book Room]
+    Decision --&gt;|No| Search[Search Other Hotels]</code></pre>
 <hr />
 <h3 id="uc-03-book-a-room">UC-03: Book a Room</h3>
 <p><strong>Actor:</strong> User<br />
-<strong>Goal:</strong> Complete room reservation</p>
+<strong>Goal:</strong> Enable users to complete room reservations using coupon codes with proper validation and error handling</p>
 <p><strong>Business Value:</strong></p>
 <ul>
 <li>Direct revenue generation</li>
 <li>Smooth checkout improves trust and platform engagement</li>
 </ul>
 <p><strong>Booking Flow:</strong></p>
-<div style="text-align: center; max-width: 800px; margin: 20px auto;">
-
 <pre class="mermaid"><code>flowchart TD
-    A[User Selects Hotel &amp; Dates] --&gt; B[Choose Payment Method or Apply Coupon]
-    B --&gt; C[System Processes Transaction]
-    C --&gt; D[System Confirms Booking]
-    D --&gt; E[User Redirected to Profile Page]
-
-    style A fill:#e3f2fd
-    style B fill:#fff9c4
-    style C fill:#ffe0b2
-    style D fill:#c8e6c9
-    style E fill:#c8e6c9</code></pre>
-
-</div>
-
+    Start[User Selects Hotel &amp; appropriate filters] --&gt; Coupon[Apply Coupon Code]
+    Coupon --&gt; Validate{Coupon Valid?}
+    Validate --&gt;|Yes| Process[System Processes Booking]
+    Validate --&gt;|No| Error[Show Error Message]
+    Error --&gt; Retry{Retry?}
+    Retry --&gt;|Yes| Coupon
+    Retry --&gt;|No| Cancel[Booking Cancelled]
+    Process --&gt; Confirm{Booking Successful?}
+    Confirm --&gt;|Yes| Success[Booking Confirmed]
+    Confirm --&gt;|No| Failed[Booking Failed]
+    Success --&gt; Profile[Redirect to Profile Page]
+    Failed --&gt; Retry</code></pre>
 <hr />
 
 

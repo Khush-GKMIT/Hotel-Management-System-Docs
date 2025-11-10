@@ -740,7 +740,7 @@
 <tbody>
 <tr>
 <td>User Registration</td>
-<td>Users create an account using email and password</td>
+<td>Users create an account using Name, email and password</td>
 </tr>
 <tr>
 <td>User Login</td>
@@ -779,10 +779,6 @@
 <td>Room Category</td>
 <td>Deluxe / Non-deluxe options</td>
 </tr>
-<tr>
-<td>Pricing Filter</td>
-<td>Set a preferred budget range</td>
-</tr>
 </tbody>
 </table>
 <hr />
@@ -800,41 +796,44 @@
 <hr />
 <h3 id="14-booking-module">1.4 Booking Module</h3>
 <h4 id="booking-flow-diagram">Booking Flow Diagram</h4>
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
 <pre class="mermaid"><code>flowchart TD
-    A[Select Hotel] --&gt; B[Choose Payment Gateway or Coupon]
-    B --&gt; C[Enter Payment Details / Apply Coupon]
-    C --&gt; D[System Validates Transaction]
-    D --&gt; E[Booking Confirmed]
-    E --&gt; F[Redirect to Profile Page]
-
-    style A fill:#e3f2fd
-    style B fill:#fff9c4
-    style C fill:#ffe0b2
-    style D fill:#ffe0b2
-    style E fill:#c8e6c9
-    style F fill:#c8e6c9</code></pre>
-
-</div>
-
+    Start[Select Hotel &amp; appropriate filters] --&gt; Coupon[Apply Coupon Code]
+    Coupon --&gt; Validate{Coupon Valid?}
+    Validate --&gt;|Yes| Process[System Processes Booking]
+    Validate --&gt;|No| Error[Show Error Message]
+    Error --&gt; Retry{Retry?}
+    Retry --&gt;|Yes| Coupon
+    Retry --&gt;|No| Cancel[Booking Cancelled]
+    Process --&gt; Confirm{Booking Successful?}
+    Confirm --&gt;|Yes| Success[Booking Confirmed]
+    Confirm --&gt;|No| Failed[Booking Failed]
+    Success --&gt; Profile[Redirect to Profile Page]
+    Failed --&gt; Retry</code></pre>
 <h4 id="user-booking-sequence">User Booking Sequence</h4>
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
 <pre class="mermaid"><code>sequenceDiagram
     participant User
     participant System
 
     User-&gt;&gt;System: Register/Login
+    System-&gt;&gt;User: Authentication Success
     User-&gt;&gt;System: Select Filters
     System-&gt;&gt;User: Display Matching Hotels
     User-&gt;&gt;System: View Hotel Details
-    User-&gt;&gt;System: Book Room
-    System-&gt;&gt;User: Booking Confirmed
-    System-&gt;&gt;User: Redirect to Profile</code></pre>
-
-</div>
-
+    System-&gt;&gt;User: Show Hotel Information
+    User-&gt;&gt;System: Apply Coupon &amp; Book Room
+    alt Coupon Valid
+        System-&gt;&gt;User: Coupon Applied
+        alt Booking Successful
+            System-&gt;&gt;User: Booking Confirmed
+            System-&gt;&gt;User: Redirect to Profile
+        else Booking Failed
+            System-&gt;&gt;User: Booking Error Message
+            User-&gt;&gt;System: Retry or Cancel
+        end
+    else Coupon Invalid
+        System-&gt;&gt;User: Invalid Coupon Error
+        User-&gt;&gt;System: Retry or Cancel
+    end</code></pre>
 <h4 id="booking-features">Booking Features</h4>
 <table>
 <thead>
@@ -844,10 +843,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Payment Gateway</td>
-<td>Accept credit/debit cards</td>
-</tr>
 <tr>
 <td>Coupon Application</td>
 <td>Apply discount coupons during checkout</td>
@@ -978,7 +973,7 @@
 </tr>
 <tr>
 <td>System</td>
-<td>Coupon, basic payment, filters</td>
+<td>Coupon,  filters</td>
 <td>Real payment</td>
 </tr>
 </tbody>

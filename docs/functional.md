@@ -10,7 +10,7 @@ It describes the primary functional requirements of the Hotel Room Booking Syste
 
 | Function | Description |
 |----------|-------------|
-| User Registration | Users create an account using email and password |
+| User Registration | Users create an account using Name, email and password |
 | User Login | Authenticates user and loads homepage |
 | Logout | Ends the session securely |
 
@@ -26,7 +26,6 @@ The homepage provides a comprehensive search and filtering system.
 | Start & End Date | Select check-in and check-out dates |
 | Number of Persons | Filter based on occupancy requirements |
 | Room Category | Deluxe / Non-deluxe options |
-| Pricing Filter | Set a preferred budget range |
 
 ---
 
@@ -46,29 +45,23 @@ Users can:
 
 #### Booking Flow Diagram
 
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
 ```mermaid
 flowchart TD
-    A[Select Hotel] --> B[Choose Payment Gateway or Coupon]
-    B --> C[Enter Payment Details / Apply Coupon]
-    C --> D[System Validates Transaction]
-    D --> E[Booking Confirmed]
-    E --> F[Redirect to Profile Page]
-    
-    style A fill:#e3f2fd
-    style B fill:#fff9c4
-    style C fill:#ffe0b2
-    style D fill:#ffe0b2
-    style E fill:#c8e6c9
-    style F fill:#c8e6c9
+    Start[Select Hotel & appropriate filters] --> Coupon[Apply Coupon Code]
+    Coupon --> Validate{Coupon Valid?}
+    Validate -->|Yes| Process[System Processes Booking]
+    Validate -->|No| Error[Show Error Message]
+    Error --> Retry{Retry?}
+    Retry -->|Yes| Coupon
+    Retry -->|No| Cancel[Booking Cancelled]
+    Process --> Confirm{Booking Successful?}
+    Confirm -->|Yes| Success[Booking Confirmed]
+    Confirm -->|No| Failed[Booking Failed]
+    Success --> Profile[Redirect to Profile Page]
+    Failed --> Retry
 ```
 
-</div>
-
 #### User Booking Sequence
-
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
 
 ```mermaid
 sequenceDiagram
@@ -76,21 +69,31 @@ sequenceDiagram
     participant System
     
     User->>System: Register/Login
+    System->>User: Authentication Success
     User->>System: Select Filters
     System->>User: Display Matching Hotels
     User->>System: View Hotel Details
-    User->>System: Book Room
-    System->>User: Booking Confirmed
-    System->>User: Redirect to Profile
+    System->>User: Show Hotel Information
+    User->>System: Apply Coupon & Book Room
+    alt Coupon Valid
+        System->>User: Coupon Applied
+        alt Booking Successful
+            System->>User: Booking Confirmed
+            System->>User: Redirect to Profile
+        else Booking Failed
+            System->>User: Booking Error Message
+            User->>System: Retry or Cancel
+        end
+    else Coupon Invalid
+        System->>User: Invalid Coupon Error
+        User->>System: Retry or Cancel
+    end
 ```
-
-</div>
 
 #### Booking Features
 
 | Feature | Description |
 |---------|-------------|
-| Payment Gateway | Accept credit/debit cards |
 | Coupon Application | Apply discount coupons during checkout |
 | Booking Confirmation | Display success message with booking details |
 | Profile Redirect | Automatically navigate to user profile after booking |
@@ -145,7 +148,7 @@ sequenceDiagram
 |---------|---------------------|------------------------|
 | User | Login, search, booking, profile info | Cancel bookings, wishlist |
 | Admin | Add/view hotels, view bookings | Analytics dashboard, role permissions |
-| System | Coupon, basic payment, filters | Real payment|
+| System | Coupon,  filters | Real payment|
 
 ---
 

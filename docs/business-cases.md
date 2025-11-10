@@ -1,6 +1,6 @@
 # Business Use Cases
 
-These use cases represent the value delivered to both end users and administrators.
+It describes how a user interacts with the system to achieve a specific goal.
 
 ---
 
@@ -14,10 +14,11 @@ mindmap
     User
       Register & Login
       Search Hotels
-      View Hotel Room Details
+      View Hotel and Room Details
       Book Room
     Admin
-      Manage Hotels
+      Login
+      Manage Hotel and Details 
       View User Details
       View Bookings
 ```
@@ -40,59 +41,51 @@ mindmap
 
 **Main Flow:**
 
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
 ```mermaid
 flowchart TD
-    A[User Registers] --> B[Enter Email + Password]
-    B --> C[Credentials Verified]
-    C --> D[System Grants Access]
-    D --> E[Access Main Platform]
-    
-    style A fill:#e3f2fd
-    style E fill:#c8e6c9
+    Start[User Visits Platform] --> Choice{New User or Existing User?}
+    Choice -->|New User| Register[Register with Name, Email & Password]
+    Choice -->|Existing User| Login[Login with Email & Password]
+    Register --> Verify[Credentials Verified]
+    Login --> Verify
+    Verify --> Grant[System Grants Access]
+    Grant --> Access[Access Main Platform]
 ```
-
-</div>
 
 ---
 
 ### UC-02: View Hotel Details
 
 **Actor:** User  
-**Goal:** Allow users to evaluate hotels comprehensively
+**Goal:** Allow users to browse hotels using filters and view detailed information including ratings and user feedback
 
 **Business Value:**
 
-- Improves user confidence in booking
-- Reduces cancellation rate due to informed decisions
+- Improves user confidence in booking through transparency
+- Reduces cancellation rate due to well-informed decisions
 
 **Features Display:**
 
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
-
 ```mermaid
-flowchart LR
-    A[View Hotel Rooms] --> B[Photo Carousel]
-    A --> C[Analyze Hotel Rooms as per rerequirement]
-    A --> D[Analyze maximum persons allowed in the room]
-    A --> E[Hotel Room Description]
-    
-    style A fill:#fff9c4
-    style B fill:#f3e5f5
-    style C fill:#f3e5f5
-    style D fill:#f3e5f5
-    style E fill:#f3e5f5
+flowchart TD
+    Start[User Views Hotel Details] --> Photos[Browse Photos of Hotel & Rooms]
+    Start --> Ratings[View Ratings & Reviews]
+    Start --> Feedback[Read User Feedback]
+    Start --> Description[Read Hotel & Room Description]
+    Photos --> Decision{Satisfied?}
+    Ratings --> Decision
+    Feedback --> Decision
+    Description --> Decision
+    Decision -->|Yes| Proceed[Proceed to Book Room]
+    Decision -->|No| Search[Search Other Hotels]
 ```
-
-</div>
 
 ---
 
 ### UC-03: Book a Room
 
 **Actor:** User  
-**Goal:** Complete room reservation
+**Goal:** Enable users to complete room reservations using coupon codes with proper validation and error handling
 
 **Business Value:**
 
@@ -101,22 +94,20 @@ flowchart LR
 
 **Booking Flow:**
 
-<div style="text-align: center; max-width: 800px; margin: 20px auto;">
-
 ```mermaid
 flowchart TD
-    A[User Selects Hotel & Dates] --> B[Choose Payment Method or Apply Coupon]
-    B --> C[System Processes Transaction]
-    C --> D[System Confirms Booking]
-    D --> E[User Redirected to Profile Page]
-    
-    style A fill:#e3f2fd
-    style B fill:#fff9c4
-    style C fill:#ffe0b2
-    style D fill:#c8e6c9
-    style E fill:#c8e6c9
+    Start[User Selects Hotel & appropriate filters] --> Coupon[Apply Coupon Code]
+    Coupon --> Validate{Coupon Valid?}
+    Validate -->|Yes| Process[System Processes Booking]
+    Validate -->|No| Error[Show Error Message]
+    Error --> Retry{Retry?}
+    Retry -->|Yes| Coupon
+    Retry -->|No| Cancel[Booking Cancelled]
+    Process --> Confirm{Booking Successful?}
+    Confirm -->|Yes| Success[Booking Confirmed]
+    Confirm -->|No| Failed[Booking Failed]
+    Success --> Profile[Redirect to Profile Page]
+    Failed --> Retry
 ```
-
-</div>
 
 ---
