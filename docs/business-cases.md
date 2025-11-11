@@ -12,12 +12,14 @@ It describes how a user interacts with the system to achieve a specific goal.
 mindmap
   root((Business Use Cases))
     User
-      Register & Login
+      Register, Login
+      Logout
       Search Hotels
       View Hotel and Room Details
       Book Room
     Admin
-      Login
+      Login 
+      Logout
       Manage Hotel and Details 
       View User Details
       View Bookings
@@ -29,7 +31,7 @@ mindmap
 
 ## 2. Detailed Use Cases
 
-### UC-01: User Registration & Login
+### UC-01A: User Registration & Login
 
 **Actor:** User  
 **Goal:** Provide a secure entry point to the system
@@ -41,16 +43,61 @@ mindmap
 
 **Main Flow:**
 
+<div style="text-align: center; max-width: 750px; margin: 20px auto;">
+
 ```mermaid
 flowchart TD
     Start[User Visits Platform] --> Choice{New User or Existing User?}
     Choice -->|New User| Register[Register with Name, Email & Password]
     Choice -->|Existing User| Login[Login with Email & Password]
-    Register --> Verify[Credentials Verified]
-    Login --> Verify
-    Verify --> Grant[System Grants Access]
+    Register --> CreateAccount[System Creates New Account]
+    CreateAccount --> Verify[Send Verification Email]
+    Verify --> Confirmed[User Confirms Email]
+    Login --> Authenticate[System Validates Credentials]
+    Confirmed --> Grant[System Grants Access]
+    Authenticate --> Grant
     Grant --> Access[Access Main Platform]
+    
+    style Register fill:#e1f5ff
+    style CreateAccount fill:#d4edda
+    style Login fill:#fff3cd
+    style Grant fill:#d4edda
+    style Access fill:#c3e6cb
 ```
+
+</div>
+
+---
+
+### UC-01B: User Logout
+
+**Actor:** User  
+**Goal:** Securely end user session and clear authentication
+
+**Business Value:**
+
+- Ensures account security when using shared devices
+- Prevents unauthorized access after user leaves platform
+
+**Main Flow:**
+
+<div style="text-align: center; max-width: 750px; margin: 20px auto;">
+
+```mermaid
+flowchart TD
+    Start[User Clicks Logout] --> Confirm{Confirm Logout?}
+    Confirm -->|Yes| Clear[System Clears Session Data]
+    Confirm -->|No| Stay[Remain Logged In]
+    Clear --> Invalidate[Terminate the Session]
+    Invalidate --> Redirect[Redirect to Login Page]
+    Redirect --> Success[Logout Successful]
+    
+    style Start fill:#fff3cd
+    style Clear fill:#e1f5ff
+    style Success fill:#d4edda
+```
+
+</div>
 
 ---
 
@@ -66,6 +113,8 @@ flowchart TD
 
 **Features Display:**
 
+<div style="text-align: center; max-width: 750px; margin: 20px auto;">
+
 ```mermaid
 flowchart TD
     Start[User Views Hotel Details] --> Photos[Browse Photos of Hotel & Rooms]
@@ -78,7 +127,13 @@ flowchart TD
     Description --> Decision
     Decision -->|Yes| Proceed[Proceed to Book Room]
     Decision -->|No| Search[Search Other Hotels]
+    
+    style Start fill:#e1f5ff
+    style Proceed fill:#d4edda
+    style Search fill:#fff3cd
 ```
+
+</div>
 
 ---
 
@@ -94,9 +149,11 @@ flowchart TD
 
 **Booking Flow:**
 
+<div style="text-align: center; max-width: 750px; margin: 20px auto;">
+
 ```mermaid
 flowchart TD
-    Start[User Selects Hotel & appropriate filters] --> Coupon[Apply Coupon Code]
+    Start[User Selects Hotel with appropriate filters] --> Coupon[Apply Coupon Code]
     Coupon --> Validate{Coupon Valid?}
     Validate -->|Yes| Process[System Processes Booking]
     Validate -->|No| Error[Show Error Message]
@@ -108,6 +165,14 @@ flowchart TD
     Confirm -->|No| Failed[Booking Failed]
     Success --> Profile[Redirect to Profile Page]
     Failed --> Retry
+    
+    style Start fill:#e1f5ff
+    style Success fill:#d4edda
+    style Error fill:#f8d7da
+    style Failed fill:#f8d7da
+    style Cancel fill:#fff3cd
 ```
+
+</div>
 
 ---

@@ -45,9 +45,11 @@ Users can:
 
 #### Booking Flow Diagram
 
+<div style="text-align: center; max-width: 750px; margin: 20px auto;">
+
 ```mermaid
 flowchart TD
-    Start[Select Hotel & appropriate filters] --> Coupon[Apply Coupon Code]
+    Start[Select Hotel with appropriate filters] --> Coupon[Apply Coupon Code]
     Coupon --> Validate{Coupon Valid?}
     Validate -->|Yes| Process[System Processes Booking]
     Validate -->|No| Error[Show Error Message]
@@ -59,54 +61,33 @@ flowchart TD
     Confirm -->|No| Failed[Booking Failed]
     Success --> Profile[Redirect to Profile Page]
     Failed --> Retry
-```
-
-#### User Booking Sequence
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant System
     
-    User->>System: Register/Login
-    System->>User: Authentication Success
-    User->>System: Select Filters
-    System->>User: Display Matching Hotels
-    User->>System: View Hotel Details
-    System->>User: Show Hotel Information
-    User->>System: Apply Coupon & Book Room
-    alt Coupon Valid
-        System->>User: Coupon Applied
-        alt Booking Successful
-            System->>User: Booking Confirmed
-            System->>User: Redirect to Profile
-        else Booking Failed
-            System->>User: Booking Error Message
-            User->>System: Retry or Cancel
-        end
-    else Coupon Invalid
-        System->>User: Invalid Coupon Error
-        User->>System: Retry or Cancel
-    end
+    style Start fill:#e1f5ff
+    style Success fill:#d4edda
+    style Error fill:#f8d7da
+    style Failed fill:#f8d7da
+    style Cancel fill:#fff3cd
 ```
+
+</div>
 
 #### Booking Features
 
 | Feature | Description |
 |---------|-------------|
 | Coupon Application | Apply discount coupons during checkout |
+| Coupon Validation | **Valid Coupons:** Active, non-expired, meets minimum booking amount, applicable to selected hotel category<br>**Invalid Coupons:** Expired, already used (if single-use), below minimum amount, not applicable to room type |
 | Booking Confirmation | Display success message with booking details |
-| Profile Redirect | Automatically navigate to user profile after booking |
 
 ---
 
-### 1.5 User Profile
+### 1.5 Hotel Reviews & Ratings
 
 | Feature | Description |
 |---------|-------------|
-| Booking History | View all past and current bookings |
-| Booking Details | See hotel name, dates, price, and status |
-| Account Information | Manage personal details and preferences |
+| View Ratings | Display average hotel rating (1-5 stars) on hotel cards and detail pages |
+| Read Reviews | Browse user feedback and experiences from past guests |
+| Rating Summary | Show rating breakdown (number of 5-star, 4-star, etc. reviews) |
 
 ---
 
@@ -146,9 +127,9 @@ sequenceDiagram
 
 | Category | In-Scope (Current) | Out-of-Scope (Future) |
 |---------|---------------------|------------------------|
-| User | Login, search, booking, profile info | Cancel bookings, wishlist |
+| User | Login, search, booking | Cancel bookings, wishlist, profile management, booking history |
 | Admin | Add/view hotels, view bookings | Analytics dashboard, role permissions |
-| System | Coupon,  filters | Real payment|
+| System | Coupon, filters | Real payment |
 
 ---
 

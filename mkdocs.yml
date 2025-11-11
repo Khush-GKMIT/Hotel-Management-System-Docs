@@ -7,28 +7,22 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
-    - navigation.expand
     - navigation.top
     - search.suggest
     - search.highlight
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
+    - navigation.indexes
+    - navigation.instant
   language: en
   palette:
-    # Light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: teal
-      accent: cyan
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-
+    scheme: default
+    primary: teal
+    accent: cyan
   
   icon:
-    logo: material/domain
-    repo: fontawesome/brands/github
+    logo: material/home-city
 
 # Removed social media links
 
@@ -58,3 +52,4 @@ nav:
   - Home: index.md
   - Functional Requirements: functional.md
   - Business Use Cases: business-cases.md
+  - Data Modelling: Data-Modelling.md
