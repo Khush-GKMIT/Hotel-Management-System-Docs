@@ -2,120 +2,125 @@
 
 ## Architecture Diagram
 
-<div style="text-align: center;">
-    <img src="../images/Flowchart.png" alt="Architecture Diagram" style="max-width: 900px; width: 100%; height: auto;">
-</div>
+This architecture illustrates the deployment workflow for the application, integrating MongoDB Atlas with AWS infrastructure. It includes separate EC2 instances for the frontend and backend, each connected to their respective GitHub repositories for continuous updates.
+
+![Flowchart](Flowchart-2.png){: .center}
 
 ---
+## Data Flow Diagram 
 
-## Deployment Flow
-
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
+This diagram illustrates the high-level movement of data across the MERN stack.
+When a user interacts with the React application, the frontend sends requests to the Node.js/Express backend. The backend processes these requests, applies business logic, and retrieves or modifies information stored in MongoDB. The response is then returned to the frontend, where it is rendered for the user.
 
 ```mermaid
-graph TD
-    A[Developer writes code] --> B[Push to GitHub Repository]
-    B --> C[GitHub Actions Triggered]
-    C --> D[Run Tests]
-    D --> E{Tests Pass?}
-    E -->|Yes| F[Deploy Frontend to EC2]
-    E -->|Yes| G[Deploy Backend to EC2]
-    E -->|No| H[Deployment Failed]
-    F --> I[System Live]
-    G --> I
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e9
-    style F fill:#ffe0b2
-    style G fill:#ffe0b2
-    style I fill:#c8e6c9
-    style H fill:#ffcdd2
+---
+config:
+  layout: dagre
+---
+flowchart LR
+
+User([User])
+
+subgraph FE[Frontend - React]
+    App[React App]
+    App -->|Home| Home[Home]
+    App -->|Booking| Booking[Booking]
+    App -->|Login| Login[Login]
+    App -->|Register| Register[Register]
+    App -->|Profile| Profile[Profile]
+    App -->|Admin| Admin[Admin]
+end
+
+subgraph BE[Backend - Node.js / Express]
+    API[Backend API]
+    API -->|Rooms| Rooms[Rooms]
+    API -->|Users| Users[Users]
+    API -->|Bookings| Bookings[Bookings]
+    API -->|Coupons| Coupons[Coupons]
+end
+
+subgraph DB[MongoDB]
+    Database[(MongoDB Collections)]
+end
+
+User --> App
+App --> API
+API --> Database
 ```
 
-</div>
+This flow ensures a clear separation of responsibilities:
+
+- **Frontend (React)** handles UI and user interactions.
+- **Backend (Express)** manages API logic and validations.
+- **Database (MongoDB)** stores rooms, users, bookings, and coupon data.
 
 ---
 
-## System Architecture
+## Authentication
 
-<div style="text-align: center; max-width: 800px; margin: 20px auto;">
+Authentication verifies the identity of the user before allowing access to application features.  
+In this MERN application, authentication is handled through the `POST /api/users/login` API, where the frontend sends user credentials to the backend. The backend validates the credentials against the MongoDB `users` collection and returns a user object on success.
+
+The frontend stores this user data in `localStorage` and uses it to maintain the session.  
+Only authenticated users can access restricted pages such as Profile and Booking.
 
 ```mermaid
-graph TB
-    User[User<br/>Web Browser] --> VPC[Amazon VPC<br/>Virtual Private Cloud]
-    
-    subgraph AWS["Amazon Web Services"]
-        VPC --> FE[Frontend EC2<br/>React.js<br/>Public Subnet]
-        VPC --> PS[Private Subnet]
-        
-        PS --> BE[Backend EC2<br/>Node.js + Express.js]
-        PS --> DB[MongoDB<br/>Database]
-        
-        FE <-->|API Requests| BE
-        BE <-->|CRUD Operations| DB
-    end
-    
-    GH[GitHub Actions<br/>CI/CD Pipeline] -.->|Deploy| FE
-    GH -.->|Deploy| BE
-    
-    style User fill:#e3f2fd
-    style VPC fill:#fff9c4
-    style FE fill:#ffccbc
-    style BE fill:#c5e1a5
-    style DB fill:#b3e5fc
-    style PS fill:#f0f0f0
-    style GH fill:#d1c4e9
+flowchart LR
+User -->|Credentials| FE[Frontend]
+FE -->|POST /login| BE[Backend API]
+BE --> DB[(MongoDB Users)]
+BE -->|Valid User Object| FE
+FE -->|Store in localStorage| Session[(Session Active)]
 ```
 
-</div>
-
 ---
 
-## Component Description
+## Authorization
 
-| Component | Technology | Description |
-|-----------|------------|-------------|
-| **User** | Web Browser | Accesses the hotel booking website through a web browser |
-| **Amazon Cloud** | AWS | Provides scalability, security, and reliability for the entire system |
-| **VPC** | Virtual Private Cloud | Isolated network environment for secure communication, protects system from unauthorized access |
-| **Frontend EC2** | React.js | User interface displaying hotel rooms, booking forms, and user dashboard. Deployed automatically via GitHub Actions |
-| **Private Subnet** | AWS Network | Secure zone isolated from public internet, contains Backend and Database for enhanced security |
-| **Backend EC2** | Node.js + Express.js | Handles business logic and API requests, processes user authentication, bookings, and payments |
-| **MongoDB** | NoSQL Database | Stores all application data  |
-| **GitHub Actions** | CI/CD Pipeline | Automated deployment from GitHub repositories to EC2 servers with separate workflows for Frontend and Backend |
+Authorization defines **what a user is allowed to do** after they are authenticated.  
+This system uses two levels of access:
 
----
+- **Normal User**  
+  Can view rooms, make bookings, and manage their profile.
 
-## Data Flow
+- **Admin User**  
+  Has elevated access to manage rooms, bookings, and users through the Admin Panel.
 
-<div style="text-align: center; max-width: 650px; margin: 20px auto;">
+Authorization is enforced on the frontend using:
+- `PrivateRoute` for user-protected pages  
+- `AdminRoute` for admin-only pages  
+
+The backend also validates admin privileges during sensitive operations by checking the `isAdmin` field in the `users` collection.
 
 ```mermaid
-sequenceDiagram
-    participant U as User
-    participant FE as Frontend EC2
-    participant BE as Backend EC2
-    participant DB as MongoDB
-
-    U->>FE: 1. Interacts with Website
-    FE->>BE: 2. Sends API Request<br/>(Login, Search, Book)
-    BE->>DB: 3. Query/Store Data
-    DB-->>BE: 4. Return Data
-    BE-->>FE: 5. Send Response
-    FE-->>U: 6. Display Results
+flowchart LR
+FE[Frontend] -->|Access Request| RouteGuard{Check Role}
+RouteGuard -->|isAdmin = true| AdminPages[Admin Panel]
+RouteGuard -->|isAdmin = false| UserPages[User Dashboard]
+RouteGuard -->|Not Authenticated| Login[Login Page]
 ```
 
-</div>
+---
 
-### Flow Explanation
+## How Services Communicate
 
-| Step | From | To | Action |
-|------|------|-----|--------|
-| 1 | User | Frontend | User interacts with the website (search hotels, make bookings) |
-| 2 | Frontend | Backend | Sends API requests for login, room search, booking operations |
-| 3 | Backend | MongoDB | Queries and stores data in the database |
-| 4 | MongoDB | Backend | Returns requested data |
-| 5 | Backend | Frontend | Sends response with processed data |
-| 6 | Frontend | User | Displays results on the user interface |
+Authentication and authorization flow between layers is consistent:
+
+- **Frontend → Backend**  
+  Sends login, registration, booking, and admin actions with the authenticated user’s ID.
+
+- **Backend → Database**  
+  Validates and fetches data from `users`, `rooms`, and `bookings` collections.
+
+- **Frontend → Local Storage**  
+  Maintains active user session for protected routes.
+
+The flow ensures secure, role-based access throughout the system.
+
+
+
+
+
+
+
+

@@ -13,6 +13,8 @@
       
       
       
+        <link rel="prev" href="../Data-Modelling/">
+      
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -249,6 +251,27 @@
   
 
       
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Technical Documentation
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -370,6 +393,115 @@
   
 
     
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Technical Documentation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Technical Documentation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Flow Diagram
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-services-communicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Services Communicate
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -406,53 +538,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deployment-flow" class="md-nav__link">
+  <a href="#data-flow-diagram" class="md-nav__link">
     <span class="md-ellipsis">
-      Deployment Flow
+      Data Flow Diagram
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#system-architecture" class="md-nav__link">
+  <a href="#authentication" class="md-nav__link">
     <span class="md-ellipsis">
-      System Architecture
+      Authentication
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#component-description" class="md-nav__link">
+  <a href="#authorization" class="md-nav__link">
     <span class="md-ellipsis">
-      Component Description
+      Authorization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
+  <a href="#how-services-communicate" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Flow
+      How Services Communicate
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Data Flow">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#flow-explanation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Flow Explanation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -474,188 +591,104 @@
 
 <h1 id="technical-documentation">Technical Documentation</h1>
 <h2 id="architecture-diagram">Architecture Diagram</h2>
-<div style="text-align: center;">
-    <img src="../images/Flowchart.png" alt="Architecture Diagram" style="max-width: 900px; width: 100%; height: auto;">
-</div>
-
+<p>This architecture illustrates the deployment workflow for the application, integrating MongoDB Atlas with AWS infrastructure. It includes separate EC2 instances for the frontend and backend, each connected to their respective GitHub repositories for continuous updates.</p>
+<p><img alt="Flowchart" class="center" src="../Flowchart-2.png" /></p>
 <hr />
-<h2 id="deployment-flow">Deployment Flow</h2>
-<div style="text-align: center; max-width: 700px; margin: 20px auto;">
+<h2 id="data-flow-diagram">Data Flow Diagram</h2>
+<p>This diagram illustrates the high-level movement of data across the MERN stack.
+When a user interacts with the React application, the frontend sends requests to the Node.js/Express backend. The backend processes these requests, applies business logic, and retrieves or modifies information stored in MongoDB. The response is then returned to the frontend, where it is rendered for the user.</p>
+<pre class="mermaid"><code>---
+config:
+  layout: dagre
+---
+flowchart LR
 
-<pre class="mermaid"><code>graph TD
-    A[Developer writes code] --&gt; B[Push to GitHub Repository]
-    B --&gt; C[GitHub Actions Triggered]
-    C --&gt; D[Run Tests]
-    D --&gt; E{Tests Pass?}
-    E --&gt;|Yes| F[Deploy Frontend to EC2]
-    E --&gt;|Yes| G[Deploy Backend to EC2]
-    E --&gt;|No| H[Deployment Failed]
-    F --&gt; I[System Live]
-    G --&gt; I
+User([User])
 
-    style A fill:#e1f5ff
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e9
-    style F fill:#ffe0b2
-    style G fill:#ffe0b2
-    style I fill:#c8e6c9
-    style H fill:#ffcdd2</code></pre>
+subgraph FE[Frontend - React]
+    App[React App]
+    App --&gt;|Home| Home[Home]
+    App --&gt;|Booking| Booking[Booking]
+    App --&gt;|Login| Login[Login]
+    App --&gt;|Register| Register[Register]
+    App --&gt;|Profile| Profile[Profile]
+    App --&gt;|Admin| Admin[Admin]
+end
 
-</div>
+subgraph BE[Backend - Node.js / Express]
+    API[Backend API]
+    API --&gt;|Rooms| Rooms[Rooms]
+    API --&gt;|Users| Users[Users]
+    API --&gt;|Bookings| Bookings[Bookings]
+    API --&gt;|Coupons| Coupons[Coupons]
+end
 
+subgraph DB[MongoDB]
+    Database[(MongoDB Collections)]
+end
+
+User --&gt; App
+App --&gt; API
+API --&gt; Database</code></pre>
+<p>This flow ensures a clear separation of responsibilities:</p>
+<ul>
+<li><strong>Frontend (React)</strong> handles UI and user interactions.</li>
+<li><strong>Backend (Express)</strong> manages API logic and validations.</li>
+<li><strong>Database (MongoDB)</strong> stores rooms, users, bookings, and coupon data.</li>
+</ul>
 <hr />
-<h2 id="system-architecture">System Architecture</h2>
-<div style="text-align: center; max-width: 800px; margin: 20px auto;">
-
-<pre class="mermaid"><code>graph TB
-    User[User&lt;br/&gt;Web Browser] --&gt; VPC[Amazon VPC&lt;br/&gt;Virtual Private Cloud]
-
-    subgraph AWS["Amazon Web Services"]
-        VPC --&gt; FE[Frontend EC2&lt;br/&gt;React.js&lt;br/&gt;Public Subnet]
-        VPC --&gt; PS[Private Subnet]
-
-        PS --&gt; BE[Backend EC2&lt;br/&gt;Node.js + Express.js]
-        PS --&gt; DB[MongoDB&lt;br/&gt;Database]
-
-        FE &lt;--&gt;|API Requests| BE
-        BE &lt;--&gt;|CRUD Operations| DB
-    end
-
-    GH[GitHub Actions&lt;br/&gt;CI/CD Pipeline] -.-&gt;|Deploy| FE
-    GH -.-&gt;|Deploy| BE
-
-    style User fill:#e3f2fd
-    style VPC fill:#fff9c4
-    style FE fill:#ffccbc
-    style BE fill:#c5e1a5
-    style DB fill:#b3e5fc
-    style PS fill:#f0f0f0
-    style GH fill:#d1c4e9</code></pre>
-
-</div>
-
+<h2 id="authentication">Authentication</h2>
+<p>Authentication verifies the identity of the user before allowing access to application features.<br />
+In this MERN application, authentication is handled through the <code>POST /api/users/login</code> API, where the frontend sends user credentials to the backend. The backend validates the credentials against the MongoDB <code>users</code> collection and returns a user object on success.</p>
+<p>The frontend stores this user data in <code>localStorage</code> and uses it to maintain the session.<br />
+Only authenticated users can access restricted pages such as Profile and Booking.</p>
+<pre class="mermaid"><code>flowchart LR
+User --&gt;|Credentials| FE[Frontend]
+FE --&gt;|POST /login| BE[Backend API]
+BE --&gt; DB[(MongoDB Users)]
+BE --&gt;|Valid User Object| FE
+FE --&gt;|Store in localStorage| Session[(Session Active)]</code></pre>
 <hr />
-<h2 id="component-description">Component Description</h2>
-<table>
-<thead>
-<tr>
-<th>Component</th>
-<th>Technology</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>User</strong></td>
-<td>Web Browser</td>
-<td>Accesses the hotel booking website through a web browser</td>
-</tr>
-<tr>
-<td><strong>Amazon Cloud</strong></td>
-<td>AWS</td>
-<td>Provides scalability, security, and reliability for the entire system</td>
-</tr>
-<tr>
-<td><strong>VPC</strong></td>
-<td>Virtual Private Cloud</td>
-<td>Isolated network environment for secure communication, protects system from unauthorized access</td>
-</tr>
-<tr>
-<td><strong>Frontend EC2</strong></td>
-<td>React.js</td>
-<td>User interface displaying hotel rooms, booking forms, and user dashboard. Deployed automatically via GitHub Actions</td>
-</tr>
-<tr>
-<td><strong>Private Subnet</strong></td>
-<td>AWS Network</td>
-<td>Secure zone isolated from public internet, contains Backend and Database for enhanced security</td>
-</tr>
-<tr>
-<td><strong>Backend EC2</strong></td>
-<td>Node.js + Express.js</td>
-<td>Handles business logic and API requests, processes user authentication, bookings, and payments</td>
-</tr>
-<tr>
-<td><strong>MongoDB</strong></td>
-<td>NoSQL Database</td>
-<td>Stores all application data</td>
-</tr>
-<tr>
-<td><strong>GitHub Actions</strong></td>
-<td>CI/CD Pipeline</td>
-<td>Automated deployment from GitHub repositories to EC2 servers with separate workflows for Frontend and Backend</td>
-</tr>
-</tbody>
-</table>
+<h2 id="authorization">Authorization</h2>
+<p>Authorization defines <strong>what a user is allowed to do</strong> after they are authenticated.<br />
+This system uses two levels of access:</p>
+<ul>
+<li>
+<p><strong>Normal User</strong><br />
+  Can view rooms, make bookings, and manage their profile.</p>
+</li>
+<li>
+<p><strong>Admin User</strong><br />
+  Has elevated access to manage rooms, bookings, and users through the Admin Panel.</p>
+</li>
+</ul>
+<p>Authorization is enforced on the frontend using:
+- <code>PrivateRoute</code> for user-protected pages<br />
+- <code>AdminRoute</code> for admin-only pages  </p>
+<p>The backend also validates admin privileges during sensitive operations by checking the <code>isAdmin</code> field in the <code>users</code> collection.</p>
+<pre class="mermaid"><code>flowchart LR
+FE[Frontend] --&gt;|Access Request| RouteGuard{Check Role}
+RouteGuard --&gt;|isAdmin = true| AdminPages[Admin Panel]
+RouteGuard --&gt;|isAdmin = false| UserPages[User Dashboard]
+RouteGuard --&gt;|Not Authenticated| Login[Login Page]</code></pre>
 <hr />
-<h2 id="data-flow">Data Flow</h2>
-<div style="text-align: center; max-width: 650px; margin: 20px auto;">
-
-<pre class="mermaid"><code>sequenceDiagram
-    participant U as User
-    participant FE as Frontend EC2
-    participant BE as Backend EC2
-    participant DB as MongoDB
-
-    U-&gt;&gt;FE: 1. Interacts with Website
-    FE-&gt;&gt;BE: 2. Sends API Request&lt;br/&gt;(Login, Search, Book)
-    BE-&gt;&gt;DB: 3. Query/Store Data
-    DB--&gt;&gt;BE: 4. Return Data
-    BE--&gt;&gt;FE: 5. Send Response
-    FE--&gt;&gt;U: 6. Display Results</code></pre>
-
-</div>
-
-<h3 id="flow-explanation">Flow Explanation</h3>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>From</th>
-<th>To</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>User</td>
-<td>Frontend</td>
-<td>User interacts with the website (search hotels, make bookings)</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Frontend</td>
-<td>Backend</td>
-<td>Sends API requests for login, room search, booking operations</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Backend</td>
-<td>MongoDB</td>
-<td>Queries and stores data in the database</td>
-</tr>
-<tr>
-<td>4</td>
-<td>MongoDB</td>
-<td>Backend</td>
-<td>Returns requested data</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Backend</td>
-<td>Frontend</td>
-<td>Sends response with processed data</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Frontend</td>
-<td>User</td>
-<td>Displays results on the user interface</td>
-</tr>
-</tbody>
-</table>
+<h2 id="how-services-communicate">How Services Communicate</h2>
+<p>Authentication and authorization flow between layers is consistent:</p>
+<ul>
+<li>
+<p><strong>Frontend → Backend</strong><br />
+  Sends login, registration, booking, and admin actions with the authenticated user’s ID.</p>
+</li>
+<li>
+<p><strong>Backend → Database</strong><br />
+  Validates and fetches data from <code>users</code>, <code>rooms</code>, and <code>bookings</code> collections.</p>
+</li>
+<li>
+<p><strong>Frontend → Local Storage</strong><br />
+  Maintains active user session for protected routes.</p>
+</li>
+</ul>
+<p>The flow ensures secure, role-based access throughout the system.</p>
 
 
 

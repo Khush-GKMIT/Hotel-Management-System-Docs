@@ -202,4 +202,4 @@ COUPONS ||--o{ BOOKINGS : "applied"
 | USERS | TRANSACTIONS | 1:N | Each user can have multiple transactions |
 | ROOMS | BOOKINGS | 1:N | Each room can have multiple bookings |
 | COUPONS | BOOKINGS | 1:N | Each coupon can be used in multiple bookings |
-| BOOKINGS | TRANSACTIONS | 1:N | Each booking can have multiple transactions (e.g., partial payments, refunds, failed transactions) |
+| BOOKINGS | TRANSACTIONS | 1:N | Each booking can have multiple transactions (e.g., Successful transactions,failed transactions) |
