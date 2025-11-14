@@ -1,60 +1,45 @@
 # Hotel Booking System
 
 ## Overview
-
-The Hotel Booking System is a comprehensive web application that connects users with hotel rooms through a modern booking platform. It offers smooth  experience for users to search, view, and book hotel rooms via coupon
+The Hotel Booking System is a web application that allows users to search, view, and book hotel rooms.  
+It provides a smooth browsing and booking experience with support for coupon-based payments.
 
 ---
 
-## Platform Roles:
+## Platform Roles
 
-<div class="grid cards" markdown>
+### User
+- Can register and log in  
+- Search hotels  
+- View hotel and room details  
+- Book rooms  
+- Manage booking history  
 
--   :material-account: **User**
-
-    ---
-
-    Can register, search hotels, view details, book rooms, and manage their booking history
-
--   :material-shield-account: **Admin**
-
-    ---
-
-    Can manage hotels, bookings, and view registered users through the admin dashboard
-
-</div>
+### Admin
+- Manage hotels  
+- View and manage bookings  
+- View registered users  
 
 ---
 
 ## Key Features
 
-<div class="grid cards" markdown>
+### Secure Authentication
+- Safe user registration and login  
+- Password protection and validation  
 
--   :material-lock: **Secure Authentication**
+### Detailed Room Views
+- Users can see hotel/room photos  
+- Description, pricing, and available services  
 
-    ---
+### Flexible Booking
+- Room booking with coupon support  
+- Simple and fast booking process  
 
-    User registration and login with secure credential management
-
--   :material-home-city: **Detailed Hotel Room Views**
-
-    ---
-
-    Users can see photos and description of hotel rooms.
-
--   :material-credit-card: **Flexible Booking**
-
-    ---
-
-    Payment options via coupon support
-
--   :material-view-dashboard: **Admin Dashboard**
-
-    ---
-
-    Complete hotel and booking management system
-
-</div>
+### Admin Dashboard
+- Admin can add, edit, and manage hotels  
+- View bookings  
+- Manage user data  
 
 ---
 
@@ -63,21 +48,21 @@ The Hotel Booking System is a comprehensive web application that connects users 
 ### 1. User Module
 
 | Feature | Description |
-|---------|-------------|
-| **Registration & Login** | Secure user authentication system |
-| **Search & Filter** | Advanced hotel search with multiple filters |
-| **Hotel Details** | Interactive carousel with photos and description |
-| **Booking** | Seamless booking via coupon options |
-| **Profile** | View and manage booking history |
+|--------|-------------|
+| Registration & Login | Secure user authentication |
+| Search & Filter | Users can search hotels with filters |
+| Hotel Details | View photos and room information |
+| Booking | Book rooms using coupon options |
+| Profile | Manage bookings and user information |
+
+---
 
 ### 2. Admin Module
 
 | Feature | Description |
-|---------|-------------|
-| **Hotel Management** | Add, edit, view hotels |
-| **Booking Management** | Monitor all system bookings |
-| **User Management** | View registered users and their details |
+|--------|-------------|
+| Hotel Management | Add, edit, delete hotel information |
+| Booking Management | View and track all bookings |
+| User Management | View registered users and details |
 
 ---
-
-
