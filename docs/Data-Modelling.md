@@ -203,3 +203,11 @@ COUPONS ||--o{ BOOKINGS : "applied"
 | ROOMS | BOOKINGS | 1:N | Each room can have multiple bookings |
 | COUPONS | BOOKINGS | 1:N | Each coupon can be used in multiple bookings |
 | BOOKINGS | TRANSACTIONS | 1:N | Each booking can have multiple transactions (e.g., Successful transactions,failed transactions) |
+
+## Database Indexing 
+
+| Collection/Table | Index Type | Fields | Purpose | Notes |
+|-----------------|------------|--------|---------|-------|
+| **USERS** | Singular | `email` | Unique user lookup during login/registration | 
+| **BOOKINGS** | Composite | `userId + status` | Query user's bookings filtered by status (active/cancelled/completed) | 
+| **BOOKINGS** | Composite | `fromDate + toDate` | Find bookings within date ranges, check room availability | 
