@@ -2,30 +2,6 @@
 
 It describes how a user interacts with the system to achieve a specific goal.
 
----
-
-## 1. Business Use Case Overview
-
-<div style="text-align: center; max-width: 800px; margin: 0 auto;">
-
-```mermaid
-mindmap
-  root((Business Use Cases))
-    User
-      Register, Login
-      Logout
-      Search Hotels
-      View Hotel and Room Details
-      Book Room
-    Admin
-      Login 
-      Logout
-      Manage Hotel and Details 
-      View User Details
-      View Bookings
-```
-
-</div>
 
 ---
 

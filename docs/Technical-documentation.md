@@ -4,7 +4,21 @@
 
 This architecture illustrates the deployment workflow for the application, integrating MongoDB Atlas with AWS infrastructure. It includes separate EC2 instances for the frontend and backend, each connected to their respective GitHub repositories for continuous updates.
 
-![Flowchart](Flowchart-2.png){: .center}
+![Flowchart](Flowchart-2.png)
+
+---
+
+## Tech Stack and sevices used
+
+| Layer              | Technologies                                               |
+|--------------------|------------------------------------------------------------|
+| Frontend           | React.js, JavaScript, Axios, Bootstrap                    |
+| Backend            | Node.js, Express.js, JWT, bcrypt, Mongoose                |
+| Database           | MongoDB Atlas                                             |
+| Infrastructure     | AWS Cloud, Default VPC, Region                            |
+| Version Control    | GitHub                                                    |
+| Additional Tools   | npm, nodemon,  Postman                             |
+
 
 ---
 ## Data Flow Diagram 
@@ -12,41 +26,30 @@ This architecture illustrates the deployment workflow for the application, integ
 This diagram illustrates the high-level movement of data across the MERN stack.
 When a user interacts with the React application, the frontend sends requests to the Node.js/Express backend. The backend processes these requests, applies business logic, and retrieves or modifies information stored in MongoDB. The response is then returned to the frontend, where it is rendered for the user.
 
+## Data Flow Diagram
+
 ```mermaid
 ---
 config:
   layout: dagre
 ---
 flowchart LR
-
-User([User])
-
-subgraph FE[Frontend - React]
-    App[React App]
-    App -->|Home| Home[Home]
-    App -->|Booking| Booking[Booking]
-    App -->|Login| Login[Login]
-    App -->|Register| Register[Register]
-    App -->|Profile| Profile[Profile]
-    App -->|Admin| Admin[Admin]
-end
-
-subgraph BE[Backend - Node.js / Express]
-    API[Backend API]
-    API -->|Rooms| Rooms[Rooms]
-    API -->|Users| Users[Users]
-    API -->|Bookings| Bookings[Bookings]
-    API -->|Coupons| Coupons[Coupons]
-end
-
-subgraph DB[MongoDB]
-    Database[(MongoDB Collections)]
-end
-
-User --> App
-App --> API
-API --> Database
+    User(("User")) -- User actions: Login, Search, Book --> FE["Frontend<br>React App"]
+    FE -- POST /login --> Auth["Authentication<br>Process"]
+    Auth -- Query: find user --> DB[("MongoDB Data Store<br>Users, Rooms, Bookings")]
+    DB -- User record --> Auth
+    Auth -- Auth response --> FE
+    FE -- GET /rooms --> Room["Room Management<br>Process"]
+    Room -- Query: rooms collection --> DB
+    DB -- Rooms list --> Room
+    Room -- Rooms data JSON --> FE
+    FE -- POST /book booking details --> Booking["Booking<br>Process"]
+    Booking -- Insert booking record --> DB
+    DB -- Booking confirmation --> Booking
+    Booking -- Booking response --> FE
+    FE -- Render pages / confirmation --> User
 ```
+
 
 This flow ensures a clear separation of responsibilities:
 
@@ -116,6 +119,7 @@ Authentication and authorization flow between layers is consistent:
   Maintains active user session for protected routes.
 
 The flow ensures secure, role-based access throughout the system.
+
 
 
 
