@@ -1,75 +1,44 @@
-# Functional Requirements
+# Hotel Booking System - Functional Requirements
 
-It describes the primary functional requirements of the Hotel Room Booking System. It captures both user-side and admin-side functionalities.
+## 1. User Features
 
----
-
-## 1. User Functional Requirements
-
-### 1.1 User Authentication
+### 1.1 Authentication
 
 | Function | Description |
 |----------|-------------|
-| User Registration | Users create an account using Name, email and password |
-| User Login | Authenticates user and loads homepage |
-| Logout | Ends the session securely |
+| Registration | Create account with name, email, password |
+| Login | Sign in and access homepage |
+| Logout | End session |
 
 ---
 
-### 1.2 Hotel Search & Filters
+### 1.2 Search & Filter Hotels
 
-The homepage provides a comprehensive search and filtering system.
-
-| Filter / Input | Description |
-|----------------|-------------|
-| Search Bar | Search hotels by name, area or keyword |
-| Start & End Date | Select check-in and check-out dates |
-| Number of Persons | Filter based on occupancy requirements |
-| Room Category | Deluxe / Non-deluxe options |
+| Filter | Description |
+|--------|-------------|
+| Search Bar | Search by hotel name or keyword |
+| Check-in/Check-out | Select dates |
+| Number of Persons | Filter by occupancy |
+| Room Category | Deluxe / Non-Deluxe |
 
 ---
 
-### 1.3 Hotel Listing & Details
+### 1.3 View Hotels
 
-Users can:
-
-- View hotel cards with name, price, description, and "Book Now" button
-- Click **View Details** to open a carousel showing:
-    - Images
-    - Price
-    - Descriptions
+- Hotel cards show: name, price, description, "Book Now" button
+- "View Details" shows: images, price, full description
 
 ---
 
-### 1.4 Booking Module
-
-#### Booking Flow Diagram
-
+### 1.4 Booking Flow
 ```mermaid
-flowchart TD
-    Start[Select Hotel & appropriate filters] --> Coupon[Apply Coupon Code]
-    Coupon --> Validate{Coupon Valid?}
-    Validate -->|Yes| Process[System Processes Booking]
-    Validate -->|No| Error[Show Error Message]
-    Error --> Retry{Retry?}
-    Retry -->|Yes| Coupon
-    Retry -->|No| Cancel[Booking Cancelled]
-    Process --> Confirm{Booking Successful?}
-    Confirm -->|Yes| Success[Booking Confirmed]
-    Confirm -->|No| Failed[Booking Failed]
-    Success --> Profile[Redirect to Profile Page]
-    Failed --> Retry
+flowchart LR
+    A[Select Hotel] --> B[View Details]
+    B --> C[Book Now]
+    C --> D[Pay Now]
+    D --> E[Booking Confirmed]
+    E --> F[Profile Page]
 ```
-
-
-
-#### Booking Features
-
-| Feature | Description |
-|---------|-------------|
-| Coupon Application | Apply discount coupons during checkout |
-| Booking Confirmation | Display success message with booking details |
-| Profile Redirect | Automatically navigate to user profile after booking |
 
 ---
 
@@ -77,22 +46,20 @@ flowchart TD
 
 | Feature | Description |
 |---------|-------------|
-| Booking History | View all past and current bookings |
-| Booking Details | See hotel name, dates, price, and status |
-| Account Information | Manage personal details and preferences |
+| Booking History | View all bookings |
+| Booking Details | Hotel, dates, room type, status |
 
 ---
 
-## 2. Admin Functional Requirements
+## 2. Admin Features
 
-### 2.1 Hotel Management
+### 2.1 Hotel & Room Management
 
 | Function | Description |
 |----------|-------------|
-| Add Hotel | Create new hotel listings with details and images |
-| Edit Hotel | Update existing hotel information |
-| View Hotels | Browse all hotels in the system |
-| Delete Hotel | Remove hotels from the database |
+| Add Hotel/Room | Add new entries |
+| Edit Hotel/Room | Update information |
+| View Hotels/Rooms | List all entries |
 
 ---
 
@@ -100,8 +67,8 @@ flowchart TD
 
 | Function | Description |
 |----------|-------------|
-| View All Bookings | See complete list of all bookings |
-| Booking Details | View user info, hotel, dates, and payment status |
+| View All Bookings | List all bookings |
+| Booking Details | User, hotel, dates, room info |
 
 ---
 
@@ -109,19 +76,15 @@ flowchart TD
 
 | Function | Description |
 |----------|-------------|
-| View Users | List all registered users |
-| User Details | View user profile and booking history |
-
-
----
-
-## 3. Scope (In-Scope and Out-of-Scope)
-
-| Category | In-Scope (Current) | Out-of-Scope (Future) |
-|---------|---------------------|------------------------|
-| User | Login, search, booking, profile info | Cancel bookings, wishlist |
-| Admin | Add/view hotels, view bookings | Analytics dashboard, role permissions |
-| System | Coupon,  filters | Real payment|
+| View Users | List all users |
+| User Details | User info and bookings |
 
 ---
 
+## 3. Out-of-Scope
+
+- Location filter
+- Map integration
+- Delete hotels, rooms, users
+- Multiple admins
+- Payment gateway

@@ -1,68 +1,102 @@
-# Hotel Booking System
+# StayEase
 
 ## Overview
-The Hotel Booking System is a web application that allows users to search, view, and book hotel rooms.  
-It provides a smooth browsing and booking experience with support for coupon-based payments.
+A simple and clean web-based system that allows users to browse hotels and rooms, view details, and book stays.  
+It also provides an admin section to manage hotels, rooms, bookings, and user information.
+
+---
+
+## Problem Statement
+When a user travels to a new city or an unfamiliar place, they often feel tired, stressed, or unsure of where to stay. 
+
+Finding a comfortable hotel becomes difficult when:
+
+- They do not know the location well  
+- They need a reliable place to rest immediately  
+- They want clear information about available rooms and facilities  
+
+Without a proper platform, travelers end up wasting time, walking around, or struggling with unclear room availability.
+
+---
+
+## Solution
+This is where our **StayEase** comes into the picture.  
+
+The system provides:
+
+- A smooth and well-structured platform for users to quickly find hotels and rooms  
+- Clear room details, photos, prices, and capacity
+- Use of appropriate filters based on their need  
+- A simple booking process so users can relax and focus on their travel and work   
+
+It ensures that a traveler can book a room easily and spend their time resting peacefully instead of searching endlessly.
+
+---
+
+## Need for This System
+- To help travelers find hotels and rooms quickly  
+- To provide transparent information about room types and availability  
+- To allow easy online bookings  
+- To streamline hotel room management for admins  
 
 ---
 
 ## Platform Roles
 
 ### User
-- Can register and log in  
-- Search hotels  
+- Register and log in  
+- Browse hotels and rooms  
 - View hotel and room details  
 - Book rooms  
-- Manage booking history  
+- View booking history  
 
 ### Admin
-- Manage hotels  
-- View and manage bookings  
-- View registered users  
+- Manage hotels and rooms  
+- View all bookings  
+- Manage registered users  
 
 ---
 
-## Key Features
+## Features
 
-### Secure Authentication
-- Safe user registration and login  
-- Password protection and validation  
+### User Authentication
+- Secure registration and login  
+- Access to personal booking history  
 
-### Detailed Room Views
-- Users can see hotel/room photos  
-- Description, pricing, and available services  
+### Hotel and Room Browsing
+- View available hotels  
+- See room types such as Deluxe and Non-Deluxe  
+- Check room photos, pricing, and descriptions  
 
-### Flexible Booking
-- Room booking with coupon support  
-- Simple and fast booking process  
+### Booking
+- Simple and smooth room booking flow  
 
-### Admin Dashboard
-- Admin can add, edit, and manage hotels  
-- View bookings  
-- Manage user data  
+### Admin Panel
+- Add hotel and room information  
+- Monitor bookings  
+- Manage user details  
 
 ---
 
-## Core Modules
+## Modules
 
-### 1. User Module
+### User Module
 
 | Feature | Description |
 |--------|-------------|
-| Registration & Login | Secure user authentication |
-| Search & Filter | Users can search hotels with filters |
-| Hotel Details | View photos and room information |
-| Booking | Book rooms using coupon options |
-| Profile | Manage bookings and user information |
+| Registration & Login | Secure login access |
+| Hotel Search | Browse available hotels |
+| Room Type | View Deluxe and Non-Deluxe room options |
+| Maximum Persons | View the maximum allowed persons in a room |
+| Hotel and Room Details | View photos, pricing, and descriptions |
+| Booking | Book rooms easily |
+| Booking History | See past bookings |
 
----
-
-### 2. Admin Module
+### Admin Module
 
 | Feature | Description |
 |--------|-------------|
-| Hotel Management | Add, edit, delete hotel information |
+| Hotel and Room Management | Add hotels and rooms |
 | Booking Management | View and track all bookings |
-| User Management | View registered users and details |
+| User Management | View registered users and their details |
 
----

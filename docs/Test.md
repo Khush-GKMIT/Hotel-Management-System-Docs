@@ -1,113 +1,134 @@
-# Test Plan – StayEase Hotel Booking System
+# Testing Documentation
 
-## 1. Introduction
-This document outlines the testing strategy for the StayEase Hotel Booking System.  
-The purpose is to validate the core functionalities such as user authentication, room management, and booking workflows for both the frontend (React) and backend (Node.js + Express + MongoDB).
+## Overview
 
----
-
-## 2. Objective
-- Ensure all APIs, UI components, and booking flows work as expected.  
-- Verify that critical user journeys (Login → Search → Book) run without functional issues.  
-- Confirm that system behavior meets acceptance criteria before deployment.
+This document describes the testing strategy and test cases for the Hotel Booking System, covering both frontend and backend components.
 
 ---
 
-## 3. Test Items
+## Testing Tools
 
-### **Frontend (React)**
-- Login Page  
-- Register Page  
-- Rooms Listing Page  
-- Booking Page  
-- User Profile  
-- Admin Dashboard  
-
-### **Backend (Node + Express)**
-- `/api/users/register`  
-- `/api/users/login`  
-- `/api/rooms/getallrooms`  
-- `/api/bookings/bookroom`  
-
-### **Database**
-- MongoDB Collections: Users, Rooms, Bookings  
+| Type | Tool |
+|------|------|
+| Frontend | Jest + React Testing Library |
+| Backend | Jest + Supertest |
 
 ---
 
-## 4. Testing Approach
+## Frontend Tests
 
-### **4.1 Manual Functional Testing**
-Performed via browser and Postman.
+### Login Screen Tests
 
-### **4.2 Automation Framework (Minimal)**
-- **Framework:** Jest + Supertest  
-- **Description:**  
-  - Jest provides unit testing  
-  - Supertest allows API endpoint testing  
+#### Positive Test Cases
 
----
+1. Form renders with email, password fields and login button
+2. User can type in email and password fields
+3. Successful login saves user data and redirects to homepage
+4. Loading spinner appears during login request
+5. Already logged-in users redirect to home page
 
-## 5. Data-Driven Testing (Test Data)
+#### Negative Test Cases
 
-### **Users**
+1. Error shown when fields are empty
+2. Error shown for invalid email format
+3. Wrong password displays error component
+4. Network failure shows error component
+5. Error component appears when API fails
 
-| Username  | Email             | Password  |
-|-----------|-------------------|-----------|
-| testUser  | test@example.com  | Test@123  |
-
-### **Rooms**
-
-| Room No | Type       | Rent / Day |
-|---------|------------|-------------|
-| 101     | Deluxe     | 2500        |
-| 203     | Non-Deluxe | 1000        |
-
-### **Booking**
-
-| User     | Room | From Date   | To Date     |
-|----------|------|--------------|--------------|
-| testUser | 101  | 2025-01-15   | 2025-01-17   |
+**Test Status:** All 10 tests passing
 
 ---
 
-## 6. Test Cases (Manual)
+## Backend Tests
 
-### **TC001 – User Registration**
+### User API Tests
 
-| Field      | Value                                                                 |
-|------------|------------------------------------------------------------------------|
-| Objective  | Verify user registration works                                          |
-| Steps      | 1. Go to Register page <br>2. Enter valid details <br>3. Submit         |
-| Expected   | User created & success message displayed                                |
+#### Positive Test Cases
 
----
+| Endpoint | Test Description |
+|----------|------------------|
+| `GET /getallusers` | Returns all users successfully |
+| `POST /register` | Creates new user with valid data |
+| `POST /login` | Login successful with valid credentials |
 
-### **TC002 – User Login**
+#### Negative Test Cases
 
-| Field      | Value                                                             |
-|------------|-------------------------------------------------------------------|
-| Objective  | Validate login with correct credentials                            |
-| Steps      | 1. Open Login page <br>2. Enter valid email/pass <br>3. Submit     |
-| Expected   | Redirect to Home page                                              |
+| Endpoint | Test Description |
+|----------|------------------|
+| `GET /getallusers` | Handles database error |
+| `POST /register` | Rejects missing required fields |
+| `POST /login` | Rejects invalid credentials |
 
----
-
-### **TC003 – Fetch All Rooms**
-
-| Field     | Value                               |
-|-----------|--------------------------------------|
-| Objective | Validate `/api/rooms/getallrooms`    |
-| Method    | GET                                  |
-| Expected  | Array of rooms with data             |
+**Test Status:** All 6 tests passing
 
 ---
 
-### **TC004 – Book a Room**
+### Booking API Tests
 
-| Field     | Value                                                                     |
-|-----------|----------------------------------------------------------------------------|
-| Objective | Validate booking flow                                                      |
-| Steps     | 1. Select room → Book Now <br>2. Fill date range <br>3. Confirm booking    |
-| Expected  | Booking saved & confirmation message                                       |
+#### Positive Test Cases
+
+| Endpoint | Test Description |
+|----------|------------------|
+| `POST /getbookingsbyuserid` | Returns user bookings successfully |
+
+#### Negative Test Cases
+
+| Endpoint | Test Description |
+|----------|------------------|
+| `POST /bookroom` | Rejects when room not found |
+
+**Test Status:** All 2 tests passing
 
 ---
+
+### Room API Tests
+
+#### Positive Test Cases
+
+| Endpoint | Test Description |
+|----------|------------------|
+| `POST /getbookingsbyuserid` | Fetches bookings for specific user |
+
+#### Negative Test Cases
+
+| Endpoint | Test Description |
+|----------|------------------|
+| `POST /bookroom` | Fails when room doesn't exist in database |
+
+**Test Status:** All 2 tests passing
+
+---
+
+## Test Summary
+
+| Category | Total Tests | Status |
+|----------|-------------|--------|
+| Frontend Tests | 10 | Pass |
+| Backend User API | 6 | Pass |
+| Backend Booking API | 2 | Pass |
+| Backend Room API | 2 | Pass |
+| **Total** | **20** | **Pass** |
+
+---
+
+## Bug Tracking
+
+All bugs identified during testing are documented and tracked in the bug report spreadsheet.
+
+**Bug Report Link:** [View Bug Report](https://docs.google.com/spreadsheets/d/1sewoAtYv1sCKzZQdqX_TVmioAWRCuymYrnelAxh5xig/edit?gid=0#gid=0)
+
+---
+
+## Running Tests
+
+### Frontend Tests
+```bash
+cd client
+npm test
+```
+
+### Backend Tests
+```bash
+cd server
+npm test
+```
