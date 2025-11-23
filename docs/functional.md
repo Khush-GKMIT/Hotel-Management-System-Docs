@@ -1,36 +1,52 @@
 # Hotel Booking System - Functional Requirements
 
-## 1. User Features
+## Features
 
-### 1.1 Authentication
+### User Authentication and Authorization
+- Secure registration and login  
+- Access to personal booking history
+- Check the user entered is admin or not   
 
-| Function | Description |
-|----------|-------------|
-| Registration | Create account with name, email, password |
-| Login | Sign in and access homepage |
-| Logout | End session |
+### Hotel and Room Browsing
+- View available hotels  
+- See room types such as Deluxe and Non-Deluxe  
+- Check room photos, pricing, and descriptions  
+
+### Booking
+- Simple and smooth room booking flow  
+
+### Admin Panel
+- Add hotel and room information  
+- Monitor bookings  
+- Monitor user details  
 
 ---
 
-### 1.2 Search & Filter Hotels
+## Modules
 
-| Filter | Description |
+### User Module
+
+| Feature | Description |
 |--------|-------------|
-| Search Bar | Search by hotel name or keyword |
-| Check-in/Check-out | Select dates |
-| Number of Persons | Filter by occupancy |
-| Room Category | Deluxe / Non-Deluxe |
+| Registration & Login | Secure login access |
+| Hotel Search | Browse available hotels |
+| Room Type | View Deluxe and Non-Deluxe room options |
+| Maximum Persons | View the maximum allowed persons in a room |
+| Hotel and Room Details | View photos, pricing, and descriptions |
+| Booking | Book rooms easily |
+| Booking History | See past bookings |
 
----
+### Admin Module
 
-### 1.3 View Hotels
+| Feature | Description |
+|--------|-------------|
+| Hotel and Room Management | Add hotels and rooms |
+| Booking Management | View and track all bookings |
+| User Management | View registered users and their details |
 
-- Hotel cards show: name, price, description, "Book Now" button
-- "View Details" shows: images, price, full description
 
----
 
-### 1.4 Booking Flow
+### Booking Flow
 ```mermaid
 flowchart LR
     A[Select Hotel] --> B[View Details]
@@ -42,7 +58,7 @@ flowchart LR
 
 ---
 
-### 1.5 User Profile
+### User Profile
 
 | Feature | Description |
 |---------|-------------|
@@ -51,19 +67,17 @@ flowchart LR
 
 ---
 
-## 2. Admin Features
+## Admin Features
 
-### 2.1 Hotel & Room Management
+### Hotel & Room Management
 
 | Function | Description |
 |----------|-------------|
 | Add Hotel/Room | Add new entries |
-| Edit Hotel/Room | Update information |
-| View Hotels/Rooms | List all entries |
 
 ---
 
-### 2.2 Booking Management
+### Booking Management
 
 | Function | Description |
 |----------|-------------|
@@ -72,7 +86,7 @@ flowchart LR
 
 ---
 
-### 2.3 User Management
+### User Management
 
 | Function | Description |
 |----------|-------------|
@@ -81,7 +95,7 @@ flowchart LR
 
 ---
 
-## 3. Out-of-Scope
+## Future Scope
 
 - Location filter
 - Map integration

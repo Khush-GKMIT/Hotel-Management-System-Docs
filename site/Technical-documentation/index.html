@@ -557,48 +557,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-communication" class="md-nav__link">
-    <span class="md-ellipsis">
-      API Communication
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="API Communication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#user-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      User Operations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hotel-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hotel Operations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#booking-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Booking Operations
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#deployment-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       Deployment Pipeline
@@ -765,48 +723,6 @@
       Authorization Levels
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-communication" class="md-nav__link">
-    <span class="md-ellipsis">
-      API Communication
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="API Communication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#user-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      User Operations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hotel-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hotel Operations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#booking-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Booking Operations
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1060,11 +976,13 @@
 
 </div>
 
-<p><strong>How it works:</strong>
-1. User enters email and password
-2. Backend checks credentials against Users collection
-3. Valid users get data stored in browser localStorage
-4. Required for booking and profile access</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>User enters email and password</li>
+<li>Backend checks credentials against Users collection</li>
+<li>Valid users get data stored in browser localStorage</li>
+<li>Required for booking and profile access</li>
+</ol>
 <hr />
 <h2 id="authorization-levels">Authorization Levels</h2>
 <div align="center">
@@ -1084,92 +1002,11 @@
 
 </div>
 
-<p><strong>Access Levels:</strong>
-- <strong>Normal User</strong>: Search, view, and book hotels
-- <strong>Admin</strong>: Full system management access</p>
-<hr />
-<h2 id="api-communication">API Communication</h2>
-<h3 id="user-operations">User Operations</h3>
-<table>
-<thead>
-<tr>
-<th>Endpoint</th>
-<th>Method</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/api/users/register</code></td>
-<td>POST</td>
-<td>Create new user</td>
-</tr>
-<tr>
-<td><code>/api/users/login</code></td>
-<td>POST</td>
-<td>Authenticate user</td>
-</tr>
-</tbody>
-</table>
-<h3 id="hotel-operations">Hotel Operations</h3>
-<table>
-<thead>
-<tr>
-<th>Endpoint</th>
-<th>Method</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/api/hotels</code></td>
-<td>GET</td>
-<td>Fetch all hotels</td>
-</tr>
-<tr>
-<td><code>/api/hotels/:id</code></td>
-<td>GET</td>
-<td>Fetch hotel details</td>
-</tr>
-<tr>
-<td><code>/api/hotels/add</code></td>
-<td>POST</td>
-<td>Add hotel (admin)</td>
-</tr>
-<tr>
-<td><code>/api/hotels/update/:id</code></td>
-<td>PUT</td>
-<td>Update hotel (admin)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="booking-operations">Booking Operations</h3>
-<table>
-<thead>
-<tr>
-<th>Endpoint</th>
-<th>Method</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/api/bookings</code></td>
-<td>POST</td>
-<td>Create booking</td>
-</tr>
-<tr>
-<td><code>/api/bookings/user/:id</code></td>
-<td>GET</td>
-<td>Get user bookings</td>
-</tr>
-<tr>
-<td><code>/api/bookings/all</code></td>
-<td>GET</td>
-<td>Get all bookings (admin)</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Access Levels:</strong></p>
+<ul>
+<li><strong>Normal User</strong>: Search, view, and book hotels</li>
+<li><strong>Admin</strong>: Full system management access</li>
+</ul>
 <hr />
 <h2 id="deployment-pipeline">Deployment Pipeline</h2>
 <div align="center">

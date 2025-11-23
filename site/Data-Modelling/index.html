@@ -492,15 +492,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#database-indexes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Indexes
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -633,15 +624,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#database-indexes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Indexes
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -682,7 +664,7 @@
         string name
         number rentPerDay
         number maxCount
-        string type
+        enum type
         string phoneNumber
         array imageUrls
         string description
@@ -830,13 +812,6 @@
 <li>A specific room number</li>
 <li>A user</li>
 </ul>
-<hr />
-<h2 id="database-indexes">Database Indexes</h2>
-<p>These indexes improve query performance:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="w"> </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">unique</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">bookings</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="w"> </span><span class="nx">userid</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">});</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">bookings</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="w"> </span><span class="nx">roomid</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">fromdate</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">todate</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">});</span>
-</code></pre></div>
 
 
 

@@ -26,7 +26,7 @@ erDiagram
         string name
         number rentPerDay
         number maxCount
-        string type
+        enum type
         string phoneNumber
         array imageUrls
         string description
@@ -153,15 +153,3 @@ Each booking references:
 - A hotel
 - A specific room number
 - A user
-
----
-
-## Database Indexes
-
-These indexes improve query performance:
-
-```javascript
-db.users.createIndex({ email: 1 }, { unique: true });
-db.bookings.createIndex({ userid: 1 });
-db.bookings.createIndex({ roomid: 1, fromdate: 1, todate: 1 });
-```

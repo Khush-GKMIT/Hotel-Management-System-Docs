@@ -81,7 +81,7 @@ This document describes the testing strategy and test cases for the Hotel Bookin
 
 ---
 
-### Room API Tests
+### Hotel API Tests
 
 #### Positive Test Cases
 
@@ -106,14 +106,14 @@ This document describes the testing strategy and test cases for the Hotel Bookin
 | Frontend Tests | 10 | Pass |
 | Backend User API | 6 | Pass |
 | Backend Booking API | 2 | Pass |
-| Backend Room API | 2 | Pass |
+| Backend Hotel API | 2 | Pass |
 | **Total** | **20** | **Pass** |
 
 ---
 
 ## Bug Tracking
 
-All bugs identified during testing are documented and tracked in the bug report spreadsheet.
+Most bugs identified during testing are documented and tracked in the bug report spreadsheet.
 
 **Bug Report Link:** [View Bug Report](https://docs.google.com/spreadsheets/d/1sewoAtYv1sCKzZQdqX_TVmioAWRCuymYrnelAxh5xig/edit?gid=0#gid=0)
 
@@ -123,12 +123,12 @@ All bugs identified during testing are documented and tracked in the bug report 
 
 ### Frontend Tests
 ```bash
-cd client
+cd frontend
 npm test
 ```
 
 ### Backend Tests
 ```bash
-cd server
+cd backend
 npm test
 ```

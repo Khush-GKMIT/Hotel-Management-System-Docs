@@ -160,6 +160,7 @@ flowchart TD
 </div>
 
 **How it works:**
+
 1. User enters email and password
 2. Backend checks credentials against Users collection
 3. Valid users get data stored in browser localStorage
@@ -189,36 +190,9 @@ flowchart TD
 </div>
 
 **Access Levels:**
+
 - **Normal User**: Search, view, and book hotels
 - **Admin**: Full system management access
-
----
-
-## API Communication
-
-### User Operations
-
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/users/register` | POST | Create new user |
-| `/api/users/login` | POST | Authenticate user |
-
-### Hotel Operations
-
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/hotels` | GET | Fetch all hotels |
-| `/api/hotels/:id` | GET | Fetch hotel details |
-| `/api/hotels/add` | POST | Add hotel (admin) |
-| `/api/hotels/update/:id` | PUT | Update hotel (admin) |
-
-### Booking Operations
-
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/bookings` | POST | Create booking |
-| `/api/bookings/user/:id` | GET | Get user bookings |
-| `/api/bookings/all` | GET | Get all bookings (admin) |
 
 ---
 

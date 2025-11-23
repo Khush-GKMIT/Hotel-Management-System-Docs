@@ -7,7 +7,7 @@ It also provides an admin section to manage hotels, rooms, bookings, and user in
 ---
 
 ## Problem Statement
-When a user travels to a new city or an unfamiliar place, they often feel tired, stressed, or unsure of where to stay. 
+Imagine someone travels to a new city or an unfamiliar place, they often feel tired, stressed, or unsure of where to stay. 
 
 Finding a comfortable hotel becomes difficult when:
 
@@ -51,52 +51,10 @@ It ensures that a traveler can book a room easily and spend their time resting p
 - View booking history  
 
 ### Admin
-- Manage hotels and rooms  
+- Add hotels and rooms  
 - View all bookings  
-- Manage registered users  
+- View registered users  
 
 ---
 
-## Features
-
-### User Authentication
-- Secure registration and login  
-- Access to personal booking history  
-
-### Hotel and Room Browsing
-- View available hotels  
-- See room types such as Deluxe and Non-Deluxe  
-- Check room photos, pricing, and descriptions  
-
-### Booking
-- Simple and smooth room booking flow  
-
-### Admin Panel
-- Add hotel and room information  
-- Monitor bookings  
-- Manage user details  
-
----
-
-## Modules
-
-### User Module
-
-| Feature | Description |
-|--------|-------------|
-| Registration & Login | Secure login access |
-| Hotel Search | Browse available hotels |
-| Room Type | View Deluxe and Non-Deluxe room options |
-| Maximum Persons | View the maximum allowed persons in a room |
-| Hotel and Room Details | View photos, pricing, and descriptions |
-| Booking | Book rooms easily |
-| Booking History | See past bookings |
-
-### Admin Module
-
-| Feature | Description |
-|--------|-------------|
-| Hotel and Room Management | Add hotels and rooms |
-| Booking Management | View and track all bookings |
-| User Management | View registered users and their details |
 
